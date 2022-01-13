@@ -17,6 +17,8 @@ router.post('/', LogController.addLog_post);
 
 router.put('/updateLog/:log_id?', LogController.updateLog_put);
 
+router.get('/deleteLog/:log_id?', LogController.deleteLog_get);
+
 router.get('/myLog', LogController.LogByUserId_get);
 
 

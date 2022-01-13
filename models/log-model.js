@@ -42,6 +42,15 @@ class Logs {
         }
     }
 
+    static async deleteLog(log_id) {
+        try {
+            const response = await db.result(`delete from log where id = ${log_id}`);
+            return response;
+        } catch (err) {
+            return err.message;
+        }
+    }
+
     static async addLog(dateapplied, opperator, holestreated, area, settings, totalgallons, sprayrig, notes, log_user_id) {
         const query = `insert into log
         (dateapplied, opperator, holestreated, area, settings, totalgallons, sprayrig, notes, log_user_id)

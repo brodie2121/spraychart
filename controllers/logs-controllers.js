@@ -26,7 +26,18 @@ exports.newLogs_get = async (req, res) => {
             is_logged_in: req.session.is_logged_in,
             user_id: req.session.user_id
     });
-  }
+}
+
+exports.deleteLog_get = async (req, res, next) => {
+    const logId = req.params.log_id;
+    const response = await LogsModels.deleteLog(logId);
+    console.log("response", response)
+    if (response.command === "DELETE" && response.rowCount >= 1) {
+        res.sendStatus(200);
+    } else {
+        res.send(`Could not delete logId: ${logId}`).status(409);
+    }
+};
 
 exports.addLog_post = async (req, res) => {
     const { dateapplied, opperator, holestreated, area, settings, totalgallons, sprayrig, notes, log_user_id } = req.body;
