@@ -1,10 +1,6 @@
 const bcrypt = require('bcryptjs');
 User = require('../models/users-model'),
 
-///////
-// PAGE GETS //
-///////
-
 exports.user_page_get = async (req, res) => {
     const userInstance = new User(req.session.user_id, null, null, null, null, null),
         getUserInfo = await userInstance.getUserInfo();
@@ -26,10 +22,6 @@ exports.logout_get = (req, res) => {
     req.session.destroy();
     res.redirect('/');
 }
-
-////////////////
-// PAGE POSTS //
-////////////////
 
 exports.login_page_post = async (req, res) => {
     const { email, password } = req.body,
