@@ -11,6 +11,7 @@ const usersRouter = require('./routes/users');
 const logsRouter = require('./routes/logs');
 const myLogsRouter = require('./routes/myLogs');
 const myProfileRouter = require('./routes/myprofile');
+const chemicalRouter = require('./routes/chemical');
 
 const app = express();
 
@@ -36,5 +37,6 @@ app.use('/users', usersRouter);
 app.use('/logs', logsRouter);
 app.use('/myLogs', myLogsRouter);
 app.use('/myprofile', myProfileRouter);
+app.use('/chemical', chemicalRouter);
 
 module.exports = app;

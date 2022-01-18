@@ -64,7 +64,6 @@ class Logs {
         }
     }
 
-
     static async updateLog(logId, dateapplied, opperator, holestreated, area, settings, totalgallons, sprayrig, notes, log_user_id) {
         const query = `
             UPDATE log
