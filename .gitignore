@@ -1,9 +1,9 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
-/node_modules
-/sessions
-/models/conn-models.js
-/sessions
-/package-lock.json
+/backend/node_modules
+/backend/sessions
+/backend/models/conn-models.js
+/backend/sessions
+/backend/package-lock.json
 # Created by https://www.gitignore.io/api/macos,visualstudiocode,node
 # Edit at https://www.gitignore.io/?templates=macos,visualstudiocode,node
 
