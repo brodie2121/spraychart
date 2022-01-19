@@ -11,7 +11,7 @@ class Chemicals {
 
     static async getAll() {
         try {
-            const response = await db.any(`select * from log LEFT JOIN users ON log.log_user_id = users.id`);
+            const response = await db.any(`select * from chemical LEFT JOIN log ON chemical.chemical_log_id = log.id`);
             return response;
         } catch(err) {
             return err.message
