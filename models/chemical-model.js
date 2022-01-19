@@ -1,9 +1,9 @@
 const db = require('./conn-model');
 
 class Chemicals {
-    constructor(id, productname, rate, productamount, chemical_log_id) {
+    constructor(id, product, rate, productamount, chemical_log_id) {
         this.id = id;
-        this.productname = productname;
+        this.product = product;
         this.rate = rate;
         this.productamount = productamount;
         this.chemical_log_id = chemical_log_id;
@@ -27,7 +27,7 @@ class Chemicals {
         }
     }
 
-    static async getByUserId(log_id) {
+    /*static async getByUserId(log_id) {
         try {
             const response = await db.any(`select * from chemical where chemical_log_id='${log_id}'`);
             console.log('this is the log-models page Log Id: ', log_id)
@@ -35,7 +35,7 @@ class Chemicals {
         } catch(err) {
             return err.message
         }
-    }
+    }*/
 
         static async getByLogId(log_id) {
         try {
@@ -56,10 +56,10 @@ class Chemicals {
         }
     }
 
-    static async addChemical(productname, rate, productamount, chemical_log_id) {
+    static async addChemical(product, rate, productamount, chemical_log_id) {
         const query = `insert into chemical
-        (productname, rate, productamount, log_id)
-    Values ('${productname}', '${rate}','${productamount}', ${chemical_log_id})`;
+        (product, rate, productamount, chemical_log_id)
+    Values ('${product}', '${rate}','${productamount}', ${chemical_log_id})`;
         try {
             let response = await db.result(query);
             return response;
@@ -69,11 +69,11 @@ class Chemicals {
         }
     }
 
-    static async updateLog(chemicalId, productname, rate, productamount, chemical_log_id) {
+    static async updateChemical(chemicalId, product, rate, productamount, chemical_log_id) {
         const query = `
             UPDATE chemical
             SET 
-                productname = '${productname}', 
+                product = '${product}', 
                 rate = '${rate}', 
                 productamount = '${productamount}', 
                 chemical_log_id = ${chemical_log_id}

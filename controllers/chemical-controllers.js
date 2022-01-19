@@ -51,15 +51,15 @@ exports.deleteChemical_get = async (req, res, next) => {
 };
 
 exports.addChemical_post = async (req, res) => {
-    const { productname, rate, productamount, log_id } = req.body;
+    const { product, rate, productamount, chemical_log_id } = req.body;
     console.log(req.body)
-    LogsModels.addLog(productname, rate, productamount, log_id)
+    ChemicalsModels.addChemical(product, rate, productamount, chemical_log_id)
     .then(async () => {
-            const UserId = req.session.user_id;
+            const LogId = req.session.user_id;
     console.log('this is req params: ', req.session.user_id)
-    console.log('user id being called is: ', UserId);
-        const myLogs = await LogsModels.getByUserId(UserId);
-            res.json(myLogs).status(200) ({
+    console.log('log id being called is: ', LogId);
+        const myChemicals = await ChemicalsModels.getByLogId(LogId);
+            res.json(myChemicals).status(200) ({
                 is_logged_in: req.session.is_logged_in,
                 user_id: req.session.user_id
             })
@@ -69,10 +69,10 @@ exports.addChemical_post = async (req, res) => {
 })}
 
 exports.updateChemical_put = async (req, res) => {
-    const logId = req.params.log_id;
+    const chemicalId = req.params.chemical_id;
     console.log(req.body);
-    const { productname, rate, productamount, log_id } = req.body;
-    const response = await LogsModels.updateLog(chemicalId, productname, rate, productamount, log_id)
+    const { product, rate, productamount, chemical_log_id } = req.body;
+    const response = await ChemicalsModels.updateChemical(chemicalId, product, rate, productamount, chemical_log_id)
     if (response.command === "UPDATE" && response.rowCount >= 1) {
         res.sendStatus(200);
     } else {
@@ -81,7 +81,7 @@ exports.updateChemical_put = async (req, res) => {
             const UserId = req.session.user_id;
     console.log('this is req params: ', req.session.user_id)
     console.log('user id being called is: ', UserId);
-        const myChemicals = await LogsModels.getByLogId(LogId);
+        const myChemicals = await ChemicalsModels.getByUserId(UserId);
             res.json(myChemicals).status(200) ({
                 is_logged_in: req.session.is_logged_in,
                 user_id: req.session.user_id

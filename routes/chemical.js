@@ -12,7 +12,7 @@ router.get('/new', ChemicalController.newChemicals_get);
 
 //router.get('/chemicalid', ChemicalController.ChemicalId_get);
 
-router.post('/', ChemicalController.addChemical_post);
+router.post('/addchemical', ChemicalController.addChemical_post);
 
 router.put('/updatechemical/:chemical_id?', ChemicalController.updateChemical_put);
 
