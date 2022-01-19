@@ -12,8 +12,8 @@ exports.ChemicalByUserId_get = async (req, res) =>{
     const UserId = req.session.user_id;
     console.log('this is req params: ', req.session.user_id)
     console.log('user id being called is: ', UserId);
-    const myLogs = await LogsModels.getByUserId(UserId);
-        res.json(myLogs).status(200) ({
+    const myChemicals = await ChemicalsModels.getByUserId(UserId);
+        res.json(myChemicals).status(200) ({
             is_logged_in: req.session.is_logged_in,
             user_id: req.session.user_id
     });
