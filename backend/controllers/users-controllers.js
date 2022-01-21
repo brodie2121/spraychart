@@ -35,7 +35,7 @@ exports.login_page_post = async (req, res) => {
         req.session.lastname = userData.lastname;
         req.session.user_id = userData.id;
         req.session.phone = userData.phone;
-        req.session.course_id = userData.course_id;
+        req.session.coursename = userData.coursename;
         console.log('CORRECT PW!');
         res.redirect('/logs/mylog');
     } else {
@@ -46,12 +46,12 @@ exports.login_page_post = async (req, res) => {
 }
 
 exports.sign_up_post = (req, res) => {
-    const { firstname, lastname, phone, email, password, course_id } = req.body;
+    const { firstname, lastname, phone, email, password, coursename } = req.body;
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt); 
     
-    const userInstance = new User(null, firstname, lastname, phone, email, hash, course_id);
+    const userInstance = new User(null, firstname, lastname, phone, email, hash, coursename);
     userInstance.save().then(response => {
         req.session.firstname = response.firstname;
         req.session.lastname = response.lastname;

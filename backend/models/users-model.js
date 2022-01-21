@@ -2,14 +2,14 @@ const db = require('./conn-model'),
     bcrypt = require('bcryptjs');
 
 class User {
-    constructor(id, firstname, lastname, phone, email, password, course_id) {
+    constructor(id, firstname, lastname, phone, email, password, coursename) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.email = email;
         this.password = password;
-        this.course_id = course_id;
+        this.coursename = coursename;
     }
 
     async checkPassword(hashedPassword) {
@@ -21,7 +21,7 @@ class User {
     async getUserByEmail() {
         try {
             const userData = await db.one(`
-            select id, firstname, lastname, phone, password, course_id
+            select id, firstname, lastname, phone, password, coursename
                 from users
             where email = $1`, 
             [this.email]);
@@ -35,11 +35,11 @@ class User {
         try {
             const response = await db.one(
                 `insert into users
-                    (firstname, lastname, phone, email, password, course_id)
+                    (firstname, lastname, phone, email, password, coursename)
                 values
                     ($1, $2, $3, $4, $5, $6)
                 returning id
-                `, [this.firstname, this.lastname, this.phone, this.email, this.password, this.course_id]);
+                `, [this.firstname, this.lastname, this.phone, this.email, this.password, this.coursename]);
             console.log('user was created with id:', response.id);
             return response;
         } catch (err) {
@@ -69,7 +69,7 @@ class User {
     async getUserInfo() {
         try {
             const userData = await db.one(`
-            select id, firstname, lastname, phone, email, password, course_id
+            select id, firstname, lastname, phone, email, password, coursename
                 from users
             where id = $1`, 
             [this.id]);
