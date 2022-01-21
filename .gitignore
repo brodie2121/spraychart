@@ -4,6 +4,7 @@
 /backend/models/conn-models.js
 /backend/sessions
 /backend/package-lock.json
+/package-lock.json
 # Created by https://www.gitignore.io/api/macos,visualstudiocode,node
 # Edit at https://www.gitignore.io/?templates=macos,visualstudiocode,node
 
