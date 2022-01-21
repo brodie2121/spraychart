@@ -11,11 +11,11 @@ exports.user_page_get = async (req, res) => {
     });
 }
 
-/*exports.login_page_get = (req, res) => {
+exports.login_page_get = (req, res) => {
         res.status(200) ({
             is_logged_in: req.session.is_logged_in,
     });
-}*/
+}
 
 exports.logout_get = (req, res) => {
     console.log('logging out');
@@ -58,6 +58,5 @@ exports.sign_up_post = (req, res) => {
         req.session.user_id = response.id;
         req.session.phone = response.phone;
         req.session.email = response.email;
-        res.redirect('/users/login');
     });
 }
