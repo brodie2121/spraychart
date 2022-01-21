@@ -14,10 +14,10 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 
-function Copyright(props) {
+function Registered(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+      {'Registered © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
       </Link>{' '}
@@ -31,63 +31,26 @@ const theme = createTheme();
 
 class Register extends Component {
   state = {
-    fullname: "",
+    firstname: "",
+    lastname: "",
     phone: "",
     email: "",
     password: "",
-    experience: "",
-    datestarted: "",
-    adminstatus: "",
-    course_id: ""
+    coursename: "",
+    createdAccount: false
   };
 
-  handleFullName = e => {
-    this.setState({
-      fullname: e.target.value
-    });
-  };
+  handleFirstName = e => { this.setState({ firstname: e.target.value }) }
 
-  handlePhone = e => {
-    this.setState({
-      phone: e.target.value
-    });
-  };
+  handleLastName = e => { this.setState({ lastname: e.target.value }) }
 
-  handleEmail = e => {
-    this.setState({
-      email: e.target.value
-    });
-  };
+  handlePhone = e => { this.setState({ phone: e.target.value }) }
 
-  handlePassword = e => {
-    this.setState({
-      password: e.target.value
-    });
-  };
+  handleEmail = e => { this.setState({ email: e.target.value }) }
 
-  handleExperience = e => {
-    this.setState({
-      experience: e.target.value
-    });
-  };
+  handlePassword = e => { this.setState({ password: e.target.value }) }
 
-  handleDateStarted = e => {
-    this.setState({
-      datestarted: e.target.value
-    });
-  };
-
-  handleAdminStatus = e => {
-    this.setState({
-      adminstatus: e.target.value
-    });
-  };
-
-  handleCourse_id = e => {
-    this.setState({
-      course_id: e.target.value
-    });
-  };
+  handleCourseName = e => { this.setState({ name: e.target.value }) }
 
   // prettier-ignore
   handleSubmit = async () => {
@@ -111,7 +74,7 @@ class Register extends Component {
 	  };
 
   render() {
-    const { EmployeeRegistered } = this.state;
+    const { UserRegistered } = this.state;
  return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -130,16 +93,27 @@ class Register extends Component {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={this.handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
-                  id="firstName"
+                  id="firstname"
                   label="First Name"
+                  autoFocus
+                />
+              </Grid>
+            <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="lastname"
+                  required
+                  fullWidth
+                  id="lastname"
+                  label="Last Name"
                   autoFocus
                 />
               </Grid>
@@ -147,10 +121,10 @@ class Register extends Component {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  id="phone"
+                  label="Phone"
+                  name="phone"
+                  autoComplete="phone"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -172,6 +146,16 @@ class Register extends Component {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="coursename"
+                  required
+                  fullWidth
+                  id="coursename"
+                  label="Course Name"
+                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
@@ -198,7 +182,7 @@ class Register extends Component {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Registered sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
