@@ -25,7 +25,7 @@ class Logs {
 
     static async getById(id) {
         try {
-            const response = await db.one(`select * from log LEFT JOIN users ON log.log_user_id=users.id where log.id=${id}`);
+            const response = await db.one(`select * from log LEFT JOIN users ON log.log_user_id=user.id where log.id=${id}`);
             return response;
         } catch(err) {
             return err.message

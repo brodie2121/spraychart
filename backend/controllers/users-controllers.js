@@ -10,11 +10,11 @@ exports.user_page_get = async (req, res) => {
     });
 }
 
-exports.login_page_get = (req, res) => {
+/*exports.login_page_get = (req, res) => {
         res.status(200) ({
             is_logged_in: req.session.is_logged_in,
     });
-}
+}*/
 
 exports.logout_get = (req, res) => {
     console.log('logging out');
@@ -32,9 +32,9 @@ exports.login_page_post = async (req, res) => {
     const isValid = bcrypt.compareSync(password, userData.password);
         if (!!isValid) {
         req.session.is_logged_in = true;
+        req.session.user_id = userData.id;
         req.session.firstname = userData.firstname;
         req.session.lastname = userData.lastname;
-        req.session.user_id = userData.id;
         req.session.phone = userData.phone;
         req.session.coursename = userData.coursename;
         console.log('CORRECT PW!');
@@ -59,6 +59,7 @@ exports.sign_up_post = (req, res) => {
         req.session.user_id = response.id;
         req.session.phone = response.phone;
         req.session.email = response.email;
-        res.redirect('/users/login');
+        req.session.coursename = response.coursename;
+        res.redirect('/');
     });
 }
