@@ -1,15 +1,22 @@
 import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 import React from "react";
-import ReactDOM from "react-dom";
 import { Route, BrowserRouter, Router } from "react-router-dom";
 import Register from "./components/register";
 
+<BrowserRouter>
+  <Route path="/users/signup" component={Register} />
+</BrowserRouter>
+
 function App() {
   return (
-<Router>
-<Route path="/users/signup?" component={Register} />
-</Router>
+    <div className="App">
+      <header className="App-header">
+        <BrowserRouter>
+  <Route path="/users/signup" component={Register} />
+</BrowserRouter>
+      </header>
+    </div>
   );
 }
 

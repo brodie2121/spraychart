@@ -17,9 +17,9 @@ import Container from '@mui/material/Container';
 function Registered(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Registered © '}
+      {'Spraylog © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Future website link
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -50,11 +50,11 @@ class Register extends Component {
 
   handlePassword = e => { this.setState({ password: e.target.value }) }
 
-  handleCourseName = e => { this.setState({ name: e.target.value }) }
+  handleCourseName = e => { this.setState({ coursename: e.target.value }) }
 
   // prettier-ignore
   handleSubmit = async () => {
-		const url = "http://localhost:3000/users/signup";
+		const url = "http://localhost:3001/users/signup";
 		const formData = this.state;
 		console.log("this is form data: ", formData);
 		const response = await fetch(url, {
