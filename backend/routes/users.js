@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/login', UsersControllers.login_page_get);
+//router.get('/login', UsersControllers.login_page_get);
 
 router.post('/login', UsersControllers.login_page_post);
 

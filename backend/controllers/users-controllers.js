@@ -4,18 +4,17 @@ User = require('../models/users-model'),
 exports.user_page_get = async (req, res) => {
     const userInstance = new User(req.session.user_id, null, null, null, null, null),
         getUserInfo = await userInstance.getUserInfo();
-        //getAllUserComments = await userInstance.getOneUserComments();
             res.json(getUserInfo).status(200) ({
             is_logged_in: req.session.is_logged_in,
             user_id: req.session.user_id
     });
 }
 
-exports.login_page_get = (req, res) => {
+/*exports.login_page_get = (req, res) => {
         res.status(200) ({
             is_logged_in: req.session.is_logged_in,
     });
-}
+}*/
 
 exports.logout_get = (req, res) => {
     console.log('logging out');
@@ -24,16 +23,18 @@ exports.logout_get = (req, res) => {
 }
 
 exports.login_page_post = async (req, res) => {
+    console.log("this is req body", req.body);
     const { email, password } = req.body,
         userInstance = new User(null, null, null,null, email, password, null);
-        const userData = await userInstance.getUserByEmail();
-        const isValid = bcrypt.compareSync(password, userData.password);
-        console.log(userData);
+    const userData = await userInstance.getUserByEmail();
+    console.log("this is user data: ",userData);
+        
+    const isValid = bcrypt.compareSync(password, userData.password);
         if (!!isValid) {
         req.session.is_logged_in = true;
+        req.session.user_id = userData.id;
         req.session.firstname = userData.firstname;
         req.session.lastname = userData.lastname;
-        req.session.user_id = userData.id;
         req.session.phone = userData.phone;
         req.session.coursename = userData.coursename;
         console.log('CORRECT PW!');
@@ -58,5 +59,7 @@ exports.sign_up_post = (req, res) => {
         req.session.user_id = response.id;
         req.session.phone = response.phone;
         req.session.email = response.email;
+        req.session.coursename = response.coursename;
+        res.redirect('/');
     });
 }
