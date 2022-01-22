@@ -19,7 +19,6 @@ exports.user_page_get = async (req, res) => {
 exports.logout_get = (req, res) => {
     console.log('logging out');
     req.session.destroy();
-    res.redirect('/');
 }
 
 exports.login_page_post = async (req, res) => {
