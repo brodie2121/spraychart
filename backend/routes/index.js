@@ -1,18 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express'),
+  router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('template', { 
-    locals: {
-      title: 'spraychart', 
-      is_logged_in: req.session.is_logged_in
-
-    },
-    partials: {
-      partial: 'partial-index'
-    }
-    });
+router.get('/', function (req, res, next) {
+  console.log(req.body)
+  res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
