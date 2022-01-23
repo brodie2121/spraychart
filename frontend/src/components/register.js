@@ -126,6 +126,16 @@ class Register extends Component {
                   autoComplete="phone"
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="coursename"
+                  required
+                  fullWidth
+                  id="coursename"
+                  label="Course Name"
+                  autoFocus
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -145,16 +155,6 @@ class Register extends Component {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="coursename"
-                  required
-                  fullWidth
-                  id="coursename"
-                  label="Course Name"
-                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
