@@ -102,6 +102,8 @@ class Register extends Component {
                   fullWidth
                   id="firstname"
                   label="First Name"
+                  onChange={this.handleFirstName}
+                  value={this.state.firstname}
                   autoFocus
                 />
               </Grid>
@@ -113,6 +115,8 @@ class Register extends Component {
                   fullWidth
                   id="lastname"
                   label="Last Name"
+                  onChange={this.handleLastName}
+                  value={this.state.lastname}
                   autoFocus
                 />
               </Grid>
@@ -124,6 +128,8 @@ class Register extends Component {
                   label="Phone"
                   name="phone"
                   autoComplete="phone"
+                  onChange={this.handlePhone}
+                  value={this.state.phone}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -134,6 +140,8 @@ class Register extends Component {
                   id="coursename"
                   label="Course Name"
                   autoFocus
+                  onChange={this.handleCourseName}
+                  value={this.state.coursename}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -144,6 +152,8 @@ class Register extends Component {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={this.handleEmail}
+                  value={this.state.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -155,6 +165,8 @@ class Register extends Component {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={this.handlePassword}
+                  value={this.state.password}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -169,6 +181,7 @@ class Register extends Component {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={this.handleSubmit}
             >
               Sign Up
             </Button>
