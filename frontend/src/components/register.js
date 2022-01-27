@@ -76,128 +76,146 @@ class Register extends Component {
   render() {
     const { UserRegistered } = this.state;
  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box component="form" noValidate onSubmit={this.handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
+      <ThemeProvider theme={theme}>
+        <Grid container component="main" sx={{ height: '100vh' }}>
+          <CssBaseline />
+          <Grid
+            item
+            xs={false}
+            sm={4}
+            md={7}
+            sx={{
+              //Going to use GIF or Picture of working application
+              backgroundImage: 'url(https://source.unsplash.com/random)',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: (t) =>
+                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <Box component="form" noValidate onSubmit={this.handleSubmit} sx={{ mt: 3 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="given-name"
+                    name="firstname"
+                    required
+                    fullWidth
+                    id="firstname"
+                    label="First Name"
+                    onChange={this.handleFirstName}
+                    value={this.state.firstname}
+                    autoFocus
+                  />
+                </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstname"
-                  required
-                  fullWidth
-                  id="firstname"
-                  label="First Name"
-                  onChange={this.handleFirstName}
-                  value={this.state.firstname}
-                  autoFocus
-                />
+                  <TextField
+                    autoComplete="given-name"
+                    name="lastname"
+                    required
+                    fullWidth
+                    id="lastname"
+                    label="Last Name"
+                    onChange={this.handleLastName}
+                    value={this.state.lastname}
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="phone"
+                    label="Phone"
+                    name="phone"
+                    autoComplete="phone"
+                    onChange={this.handlePhone}
+                    value={this.state.phone}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="coursename"
+                    required
+                    fullWidth
+                    id="coursename"
+                    label="Course Name"
+                    autoFocus
+                    onChange={this.handleCourseName}
+                    value={this.state.coursename}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    onChange={this.handleEmail}
+                    value={this.state.email}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    onChange={this.handlePassword}
+                    value={this.state.password}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox value="allowExtraEmails" color="primary" />}
+                    label="I want to receive inspiration, marketing promotions and updates via email."
+                  />
+                </Grid>
               </Grid>
-            <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="lastname"
-                  required
-                  fullWidth
-                  id="lastname"
-                  label="Last Name"
-                  onChange={this.handleLastName}
-                  value={this.state.lastname}
-                  autoFocus
-                />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={this.handleSubmit}
+              >
+                Sign Up
+              </Button>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="phone"
-                  label="Phone"
-                  name="phone"
-                  autoComplete="phone"
-                  onChange={this.handlePhone}
-                  value={this.state.phone}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="coursename"
-                  required
-                  fullWidth
-                  id="coursename"
-                  label="Course Name"
-                  autoFocus
-                  onChange={this.handleCourseName}
-                  value={this.state.coursename}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  onChange={this.handleEmail}
-                  value={this.state.email}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={this.handlePassword}
-                  value={this.state.password}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={this.handleSubmit}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-        <Registered sx={{ mt: 5 }} />
-      </Container>
-    </ThemeProvider>
-  );
-}
+          <Registered sx={{ mt: 5 }} />
+        </Container>
+        </Grid>
+      </ThemeProvider>
+    );
+  }
 }
 export default Register;
