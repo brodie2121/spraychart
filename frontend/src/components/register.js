@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+//import { Redirect } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -204,9 +204,10 @@ class Register extends Component {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
+                    <Link onClick={() => window.location.replace('login')} href="#" variant="body2"
+                        >
+                        Already have an account? Sign in here
+                    </Link>
                 </Grid>
               </Grid>
             </Box>
