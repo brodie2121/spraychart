@@ -96,7 +96,7 @@ class Login extends Component {
     }
 
     render() {
-        const { login } = this.state;
+        const { Login } = this.state;
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
@@ -174,7 +174,6 @@ class Login extends Component {
                 >
                     Sign In
                 </Button>
-                {!!login ? <Redirect to="/home" /> : Homepage}
                 <Grid container justifyContent="flex-end">
                     <Grid item>
                     <Link onClick={() => window.location.replace('signup')} href="#" variant="body2"
@@ -188,6 +187,7 @@ class Login extends Component {
             <LoggedIn sx={{ mt: 5 }} />
             </Container>
             </Grid>
+            {!!Login ? <Redirect to="/home" /> : Homepage}
         </ThemeProvider>
         );
     }

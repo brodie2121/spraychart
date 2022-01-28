@@ -37,10 +37,8 @@ exports.login_page_post = async (req, res) => {
         req.session.phone = userData.phone;
         req.session.coursename = userData.coursename;
         console.log('CORRECT PW!');
-        res.redirect('/logs/mylog');
     } else {
         console.log('WRONG PW!');
-        res.redirect('/users/signup');
         res.sendStatus(401);
     }
 }
