@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import Alert from '@mui/material/Alert';
+import Homepage from "./homepage";
 
 function LoggedIn(props) {
   return (
@@ -35,10 +35,9 @@ class Login extends Component {
         email: "",
         password: "",
         login: false,
-        errorCode: 0
     };
 
-        componentDidMount = () => {
+    componentDidMount = () => {
         if (this.props.location.errorCode !== undefined) {
             this.setState({ errorCode: this.props.location.errorCode })
         }
@@ -64,15 +63,30 @@ class Login extends Component {
             console.log("this is login response data: ", data);
             const { login, errorCode } = data;
             if (!!login) {
-                const { id, firstname, lastname, email, phone, coursename } = data;
-                this.props.handleLoginState({ login, id, firstname, lastname, email, phone, coursename })
+                const { 
+                    id, 
+                    firstname, 
+                    lastname, 
+                    email, 
+                    phone, 
+                    coursename 
+                } = data;
+                this.props.changeLoginState({ 
+                    login, 
+                    id, 
+                    firstname, 
+                    lastname, 
+                    email, 
+                    phone, 
+                    coursename 
+                })
             };
             this.setState({
                 login,
                 errorCode
             })
         } catch (err) {
-            this.setState({ errorCode: 3 });
+        console.log("there has been login error", err);
         }
     }
 
@@ -82,7 +96,7 @@ class Login extends Component {
     }
 
     render() {
-        const { login, errorCode } = this.state;
+        const { login } = this.state;
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
@@ -160,6 +174,7 @@ class Login extends Component {
                 >
                     Sign In
                 </Button>
+                {!!login ? <Redirect to="/home" /> : Homepage}
                 <Grid container justifyContent="flex-end">
                     <Grid item>
                     <Link onClick={() => window.location.replace('signup')} href="#" variant="body2"
@@ -172,29 +187,7 @@ class Login extends Component {
             </Box>
             <LoggedIn sx={{ mt: 5 }} />
             </Container>
-                {errorCode === 1 ?
-                    <Alert variant="filled" severity="error">
-                    This is an error alert — check it out!
-                    </Alert>
-                    :
-                    errorCode === 2
-                    ?
-                    <Alert variant="filled" severity="warning">
-                    This is a warning alert — check it out!
-                    </Alert>
-                    : errorCode === 3
-                    ?
-                    <Alert variant="filled" severity="info">
-                    This is an info alert — check it out!
-                    </Alert>
-                    : errorCode === 4
-                    ?
-                    <Alert variant="filled" severity="success">
-                    This is a success alert — check it out!
-                    </Alert>
-                : ''}
             </Grid>
-            {(!!login) ? <Redirect to="/home" /> : ""}
         </ThemeProvider>
         );
     }
