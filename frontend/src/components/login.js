@@ -38,12 +38,18 @@ class Login extends Component {
         errorCode: 0
     };
 
+        componentDidMount = () => {
+        if (this.props.location.errorCode !== undefined) {
+            this.setState({ errorCode: this.props.location.errorCode })
+        }
+    }
+
     handleEmail = e => { this.setState({ email: e.target.value }) }
 
     handlePassword = e => { this.setState({ password: e.target.value }) }
 
   // prettier-ignore
-    login = async () => {
+    handleSubmit = async () => {
 		const url = "http://localhost:3001/users/login";
         try { 
             const response = await fetch(url, {
@@ -55,10 +61,11 @@ class Login extends Component {
                 body: JSON.stringify(this.state)
             });
             const data = await response.json();
+            console.log("this is login response data: ", data);
             const { login, errorCode } = data;
             if (!!login) {
                 const { id, firstname, lastname, email, phone, coursename } = data;
-                this.props.changeLoginState({ login, id, firstname, lastname, email, phone, coursename })
+                this.props.handleLoginState({ login, id, firstname, lastname, email, phone, coursename })
             };
             this.setState({
                 login,
@@ -68,7 +75,12 @@ class Login extends Component {
             this.setState({ errorCode: 3 });
         }
     }
-    
+
+    saveToLocal() {
+        const local = this.state.login;
+        localStorage.setItem("login", JSON.stringify(local));
+    }
+
     render() {
         const { login, errorCode } = this.state;
     return (
@@ -144,7 +156,7 @@ class Login extends Component {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
-                    onClick={this.login}
+                    onClick={this.handleSubmit}
                 >
                     Sign In
                 </Button>
@@ -182,7 +194,7 @@ class Login extends Component {
                     </Alert>
                 : ''}
             </Grid>
-            {(!!login) ? <Redirect to="/users" /> : ""}
+            {(!!login) ? <Redirect to="/home" /> : ""}
         </ThemeProvider>
         );
     }
