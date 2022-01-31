@@ -96,7 +96,7 @@ class Login extends Component {
     }
 
     render() {
-        const { Login } = this.state;
+        const { login } = this.state;
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
@@ -129,7 +129,7 @@ class Login extends Component {
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                Sign up
+                Sign In
                 </Typography>
                 <Box component="form" noValidate onSubmit={this.handleSubmit} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
@@ -187,7 +187,7 @@ class Login extends Component {
             <LoggedIn sx={{ mt: 5 }} />
             </Container>
             </Grid>
-            {!!Login ? <Redirect to="/home" /> : Homepage}
+            
         </ThemeProvider>
         );
     }
