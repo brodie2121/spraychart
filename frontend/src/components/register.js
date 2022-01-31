@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -209,6 +209,7 @@ class Register extends Component {
                         Already have an account? Sign in here
                     </Link>
                 </Grid>
+                {!!UserRegistered ? <Redirect to="/signup" /> : ""}
               </Grid>
             </Box>
           </Box>

@@ -37,12 +37,6 @@ class Login extends Component {
         login: false,
     };
 
-    componentDidMount = () => {
-        if (this.props.location.errorCode !== undefined) {
-            this.setState({ errorCode: this.props.location.errorCode })
-        }
-    }
-
     handleEmail = e => { this.setState({ email: e.target.value }) }
 
     handlePassword = e => { this.setState({ password: e.target.value }) }
