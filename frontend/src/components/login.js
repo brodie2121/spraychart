@@ -123,7 +123,7 @@ class Login extends Component {
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                Sign up
+                Sign In
                 </Typography>
                 <Box component="form" noValidate onSubmit={this.handleSubmit} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
@@ -168,7 +168,6 @@ class Login extends Component {
                 >
                     Sign In
                 </Button>
-                {!!login ? <Redirect to="/home" /> : Homepage}
                 <Grid container justifyContent="flex-end">
                     <Grid item>
                     <Link onClick={() => window.location.replace('signup')} href="#" variant="body2"
@@ -182,6 +181,7 @@ class Login extends Component {
             <LoggedIn sx={{ mt: 5 }} />
             </Container>
             </Grid>
+            
         </ThemeProvider>
         );
     }
