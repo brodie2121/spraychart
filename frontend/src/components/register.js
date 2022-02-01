@@ -54,6 +54,7 @@ class Register extends Component {
 
   // prettier-ignore
   handleSubmit = async () => {
+    this.props.history.push('/users/login');
 		const url = "http://localhost:3001/users/signup";
 		const formData = this.state;
 		console.log("this is form data: ", formData);
