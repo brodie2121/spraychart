@@ -8,12 +8,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import swal from 'sweetalert';
 import Grid from '@mui/material/Grid';
-//import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import Homepage from "./homepage";
+const axios = require('axios');
+const bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
+
 
 function LoggedIn(props) {
   return (
@@ -30,73 +33,40 @@ function LoggedIn(props) {
 
 const theme = createTheme();
 
-class Login extends Component {
-    state = {
-        email: "",
-        password: "",
-        login: false,
+export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
     };
+  }
 
-    componentDidMount = () => {
-        if (this.props.location.errorCode !== undefined) {
-            this.setState({ errorCode: this.props.location.errorCode })
-        }
-    }
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-    handleEmail = e => { this.setState({ email: e.target.value }) }
+  login = () => {
 
-    handlePassword = e => { this.setState({ password: e.target.value }) }
+    const pwd = bcrypt.hashSync(this.state.password, salt);
 
-  // prettier-ignore
-    handleSubmit = async () => {
-		const url = "http://localhost:3001/users/login";
-        try { 
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(this.state)
-            });
-            const data = await response.json();
-            console.log("this is login response data: ", data);
-            const { login, errorCode } = data;
-            if (!!login) {
-                const { 
-                    id, 
-                    firstname, 
-                    lastname, 
-                    email, 
-                    phone, 
-                    coursename 
-                } = data;
-                this.props.changeLoginState({ 
-                    login, 
-                    id, 
-                    firstname, 
-                    lastname, 
-                    email, 
-                    phone, 
-                    coursename 
-                })
-            };
-            this.setState({
-                login,
-                errorCode
-            })
-        } catch (err) {
-        console.log("there has been login error", err);
-        }
-    }
-
-    saveToLocal() {
-        const local = this.state.login;
-        localStorage.setItem("login", JSON.stringify(local));
-    }
+    axios.post('http://localhost:3001/users/login', {
+      email: this.state.email,
+      password: pwd,
+    }).then((res) => {
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user_id', res.data.id);
+      this.props.history.push('/homepage');
+    }).catch((err) => {
+      if (err.response && err.response.data && err.response.data.errorMessage) {
+        swal({
+          text: err.response.data.errorMessage,
+          icon: "error",
+          type: "error"
+        });
+      }
+    });
+  }
 
     render() {
-        const { login } = this.state;
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
@@ -141,7 +111,7 @@ class Login extends Component {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
-                        onChange={this.handleEmail}
+                        onChange={this.onChange}
                         value={this.state.email}
                     />
                     </Grid>
@@ -154,7 +124,7 @@ class Login extends Component {
                         type="password"
                         id="password"
                         autoComplete="new-password"
-                        onChange={this.handlePassword}
+                        onChange={this.onChange}
                         value={this.state.password}
                     />
                     </Grid>
@@ -170,7 +140,8 @@ class Login extends Component {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
-                    onClick={this.handleSubmit}
+                    disabled={this.state.email === '' && this.state.password === ''}
+                    onClick={this.login}
                 >
                     Sign In
                 </Button>
@@ -192,4 +163,3 @@ class Login extends Component {
         );
     }
 }
-export default Login;
