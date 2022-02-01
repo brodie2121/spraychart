@@ -45,16 +45,15 @@ export default class Login extends React.Component {
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   login = () => {
-
+    this.props.history.push('/home');
     const pwd = bcrypt.hashSync(this.state.password, salt);
 
     axios.post('http://localhost:3001/users/login', {
       email: this.state.email,
-      password: pwd,
+      password: this.state.password,
     }).then((res) => {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user_id', res.data.id);
-      this.props.history.push('/homepage');
     }).catch((err) => {
       if (err.response && err.response.data && err.response.data.errorMessage) {
         swal({
