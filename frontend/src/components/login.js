@@ -43,6 +43,7 @@ class Login extends Component {
 
   // prettier-ignore
     handleSubmit = async () => {
+        this.props.history.push('/home');
 		const url = "http://localhost:3001/users/login";
         try { 
             const response = await fetch(url, {
