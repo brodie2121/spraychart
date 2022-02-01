@@ -13,7 +13,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import Homepage from "./homepage";
 
 function LoggedIn(props) {
   return (
@@ -30,6 +29,10 @@ function LoggedIn(props) {
 
 const theme = createTheme();
 
+  const onSubmit = (data) => {
+    this.props.updateUser(data);
+    this.props.history.push('/home');
+  };
 class Login extends Component {
     state = {
         email: "",
@@ -43,7 +46,6 @@ class Login extends Component {
 
   // prettier-ignore
     handleSubmit = async () => {
-        this.props.history.push('/home');
 		const url = "http://localhost:3001/users/login";
         try { 
             const response = await fetch(url, {
@@ -54,6 +56,7 @@ class Login extends Component {
                 },
                 body: JSON.stringify(this.state)
             });
+
             const data = await response.json();
             console.log("this is login response data: ", data);
             const { login, errorCode } = data;
@@ -91,7 +94,6 @@ class Login extends Component {
     }
 
     render() {
-        const { login } = this.state;
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
@@ -126,7 +128,7 @@ class Login extends Component {
                 <Typography component="h1" variant="h5">
                 Sign In
                 </Typography>
-                <Box component="form" noValidate onSubmit={this.handleSubmit} sx={{ mt: 3 }}>
+                <Box component="form" sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                     <TextField
@@ -182,7 +184,6 @@ class Login extends Component {
             <LoggedIn sx={{ mt: 5 }} />
             </Container>
             </Grid>
-            
         </ThemeProvider>
         );
     }

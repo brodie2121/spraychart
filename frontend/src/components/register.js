@@ -54,7 +54,6 @@ class Register extends Component {
 
   // prettier-ignore
   handleSubmit = async () => {
-    this.props.history.push('/users/login');
 		const url = "http://localhost:3001/users/signup";
 		const formData = this.state;
 		console.log("this is form data: ", formData);
@@ -70,6 +69,7 @@ class Register extends Component {
 			this.setState({
 				accountCreated: true
 			});
+      this.props.history.push('/users/login');
 		}
 		console.log("account created: ", this.state.accountCreated);
 	  };
